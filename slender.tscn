@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=3 uid="uid://be4bpekyhcm1b"]
+
+[ext_resource type="Script" uid="uid://bswfrt1munudk" path="res://scripts/monster.gd" id="1_hh8ak"]
+[ext_resource type="PackedScene" uid="uid://xcxdbv5xxoge" path="res://Assets/MyModels/slender.glb" id="2_hh8ak"]
+[ext_resource type="Shader" uid="uid://bfclextqh4o2d" path="res://Assets/#NVJOB Slender/Slender/Materials/monster_face.gdshader" id="3_lggmj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxcjy"]
+render_priority = 0
+shader = ExtResource("3_lggmj")
+shader_parameter/noise_strength = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/noise_scale = 5.0
+shader_parameter/flicker_threshold = 0.9
+shader_parameter/flicker_speed = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qqups"]
+render_priority = 0
+shader = ExtResource("3_lggmj")
+shader_parameter/noise_strength = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/noise_scale = 5.0
+shader_parameter/flicker_threshold = 0.9
+shader_parameter/flicker_speed = 0.001
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yr3j7"]
+render_priority = 0
+shader = ExtResource("3_lggmj")
+shader_parameter/noise_strength = 1.0
+shader_parameter/speed = 2.0
+shader_parameter/noise_scale = 5.0
+shader_parameter/flicker_threshold = 0.9
+shader_parameter/flicker_speed = 0.001
+
+[node name="slender" type="Node3D"]
+script = ExtResource("1_hh8ak")
+
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D(0.789845, 0, 0.613307, 0, 1, 0, -0.613307, 0, 0.789845, -0.0759753, 0, 0)
+
+[node name="slender" parent="pivot" instance=ExtResource("2_hh8ak")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 0, 0, 0)
+
+[node name="Skeleton3D" parent="pivot/slender/Slender_Armature" index="0"]
+bones/1/rotation = Quaternion(0.0305625, -0.00304676, 0.00216477, 0.999526)
+bones/2/rotation = Quaternion(0.0923719, 0.0244405, 0.0300973, 0.994969)
+bones/3/rotation = Quaternion(0.280439, -0.00408482, 0.00265189, 0.95986)
+bones/4/rotation = Quaternion(-0.0271826, -0.00113192, -0.00351972, 0.999624)
+bones/5/rotation = Quaternion(-0.0677048, -0.0155399, -0.175496, 0.982026)
+bones/6/rotation = Quaternion(0.93092, -0.00337022, -0.0013253, 0.365206)
+bones/7/rotation = Quaternion(-0.00118694, 0.890855, -0.454272, 0.0035006)
+bones/8/rotation = Quaternion(-0.124534, -0.00360727, 0.00023415, 0.992209)
+bones/9/rotation = Quaternion(-0.235702, 0.0422988, -0.0357327, 0.970247)
+bones/11/rotation = Quaternion(0.00641731, 0.546534, 0.837375, -0.00790079)
+bones/15/rotation = Quaternion(0.00364711, 0.779441, 0.626393, -0.00950314)
+bones/19/rotation = Quaternion(0.00537394, 0.669123, 0.743077, -0.00905351)
+bones/23/rotation = Quaternion(-0.0711019, 0.0327055, -0.798179, 0.597315)
+bones/24/rotation = Quaternion(0.36646, 0.0294305, -0.395886, 0.841496)
+bones/25/rotation = Quaternion(0.144452, 0.00208353, -0.000325562, 0.98951)
+bones/26/rotation = Quaternion(0.0426615, 0.543814, -0.0431621, 0.837008)
+bones/27/rotation = Quaternion(0.123081, 0.781026, 0.282155, 0.543358)
+bones/28/rotation = Quaternion(0.209995, -0.0932866, -0.199982, 0.952474)
+bones/29/rotation = Quaternion(0.13781, -0.0445559, -0.0947228, 0.984912)
+bones/31/rotation = Quaternion(0.0646472, 0.489313, 0.00631481, 0.869686)
+bones/32/rotation = Quaternion(0.239845, 0.0239822, 0.0696258, 0.968014)
+bones/33/rotation = Quaternion(0.127328, 0.00638191, 0.0443419, 0.990849)
+bones/35/rotation = Quaternion(0.092452, 0.425441, -0.0265775, 0.899859)
+bones/36/rotation = Quaternion(0.254123, 0.0186892, 0.0427197, 0.966047)
+bones/37/rotation = Quaternion(0.202639, 0.00729412, 0.0379076, 0.978492)
+bones/39/rotation = Quaternion(0.159888, 0.266363, -0.0913386, 0.94612)
+bones/40/rotation = Quaternion(0.258445, 0.0226161, -0.0106144, 0.965703)
+bones/41/rotation = Quaternion(0.45971, 0.00156449, -0.0820115, 0.884273)
+bones/43/rotation = Quaternion(0.122527, 0.382943, -0.0559519, 0.913899)
+bones/44/rotation = Quaternion(0.386025, 0.0292875, 0.0381953, 0.921232)
+bones/45/rotation = Quaternion(0.267921, 0.00399433, 0.0290032, 0.962996)
+bones/47/rotation = Quaternion(-0.00952899, 0.00286234, 0.784169, 0.620467)
+bones/48/rotation = Quaternion(0.325563, -0.0722755, 0.425798, 0.841119)
+bones/49/rotation = Quaternion(0.221355, 0.0683367, 0.000105642, 0.972796)
+bones/50/rotation = Quaternion(-0.0175987, -0.372888, -0.052266, 0.926236)
+bones/51/rotation = Quaternion(0.158407, -0.760044, -0.26625, 0.571272)
+bones/52/rotation = Quaternion(0.198225, 0.0306702, 0.172098, 0.964442)
+bones/53/rotation = Quaternion(0.11733, 0.0211853, 0.0660051, 0.990671)
+bones/55/rotation = Quaternion(0.122484, -0.487113, 0.00408117, 0.864698)
+bones/56/rotation = Quaternion(0.159466, -0.0348643, -0.0290251, 0.986161)
+bones/57/rotation = Quaternion(0.0963703, -0.00975193, -0.0195347, 0.995106)
+bones/59/rotation = Quaternion(0.0991877, -0.426849, 0.0385474, 0.89804)
+bones/60/rotation = Quaternion(0.295968, -0.0169256, -0.0245196, 0.954733)
+bones/61/rotation = Quaternion(0.162053, -0.0107339, -0.0186287, 0.986548)
+bones/63/rotation = Quaternion(0.223833, -0.258176, 0.1241, 0.931581)
+bones/64/rotation = Quaternion(0.227574, -0.022593, 0.098891, 0.968463)
+bones/65/rotation = Quaternion(0.489243, -0.0193127, 0.0976861, 0.866444)
+bones/67/rotation = Quaternion(0.175312, -0.374301, 0.0774508, 0.907285)
+bones/68/rotation = Quaternion(0.317723, -0.0168292, 0.0259415, 0.947679)
+bones/69/rotation = Quaternion(0.346879, -0.00752725, -0.0060385, 0.93786)
+bones/71/rotation = Quaternion(0.950659, 0.0234923, -0.308782, 0.0186991)
+bones/72/rotation = Quaternion(0.24772, 0.27181, -0.0928109, 0.925278)
+bones/73/rotation = Quaternion(-0.68547, -0.0262903, -0.0599158, 0.725156)
+bones/74/rotation = Quaternion(-0.12148, -0.00356308, 0.0174949, 0.992433)
+bones/76/rotation = Quaternion(0.950941, -0.0394366, 0.306579, 0.0128642)
+bones/77/rotation = Quaternion(0.252002, -0.237915, 0.0744617, 0.935065)
+bones/78/rotation = Quaternion(-0.6897, 0.026198, 0.06375, 0.720807)
+bones/79/rotation = Quaternion(-0.122842, 0.00362154, -0.0172785, 0.992269)
+
+[node name="Slender_Mesh" parent="pivot/slender/Slender_Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_sxcjy")
+surface_material_override/1 = SubResource("ShaderMaterial_qqups")
+surface_material_override/2 = SubResource("ShaderMaterial_yr3j7")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00177157, 2.35733, -0.382238)
+volume_db = -10.0
+
+[editable path="pivot/slender"]

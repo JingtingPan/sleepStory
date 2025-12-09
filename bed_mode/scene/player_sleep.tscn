@@ -1,0 +1,192 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbbp6jiaa6lw4"]
+
+[ext_resource type="Script" uid="uid://bn8qri6isofkn" path="res://bed_mode/script/player_sleep.gd" id="1_t1jko"]
+[ext_resource type="PackedScene" uid="uid://cdknvfedt2d5i" path="res://Assets/MyModels/kid.glb" id="2_aumr8"]
+[ext_resource type="Script" uid="uid://ttrq6d2l113m" path="res://bed_mode/script/player_state_controller.gd" id="2_bw0wc"]
+[ext_resource type="AudioStream" uid="uid://cs2uu8y8f682n" path="res://sfx/player/drink/drink_soda-[AudioTrimmer.com].mp3" id="4_xcu84"]
+[ext_resource type="AudioStream" uid="uid://w1qnfc1i844p" path="res://sfx/player/heatbeat/heartbeat-01.mp3" id="5_lcg4x"]
+[ext_resource type="AudioStream" uid="uid://c6g5jwyoabjp6" path="res://sfx/player/gasp-sfx-351568.mp3" id="6_i7m25"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_exqnh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77120"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xcu84"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_lcg4x"]
+font_size = 6
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_t1jko")
+
+[node name="HeadPivot" type="Node3D" parent="."]
+
+[node name="CameraPivot" type="Node3D" parent="HeadPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="HeadPivot/CameraPivot"]
+
+[node name="AudioListener3D" type="AudioListener3D" parent="HeadPivot/CameraPivot"]
+current = true
+
+[node name="InteractRayCast" type="RayCast3D" parent="HeadPivot/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.0106452)
+collide_with_areas = true
+
+[node name="kid" parent="HeadPivot" instance=ExtResource("2_aumr8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0221385, -2.5559, 0.943726)
+
+[node name="Skeleton3D" parent="HeadPivot/kid/Armature_001" index="0"]
+bones/0/position = Vector3(67.5411, -1.24936, -143.581)
+bones/0/rotation = Quaternion(-0.715153, 0.0165763, 0.0252385, 0.698315)
+bones/1/rotation = Quaternion(0.00255565, -0.00335648, 0.0243773, 0.999694)
+bones/2/rotation = Quaternion(0.00153236, -0.0224303, -0.015442, 0.999628)
+bones/3/position = Vector3(-9.10495e-06, 20.2363, 3.97407e-07)
+bones/3/rotation = Quaternion(0.0020682, -0.0223932, -0.0153195, 0.99963)
+bones/4/position = Vector3(1.09522e-05, 22.7658, 5.96047e-07)
+bones/4/rotation = Quaternion(-0.0118734, 0.0129098, -0.0424571, 0.998944)
+bones/5/rotation = Quaternion(0.0339217, -0.00665432, -0.0348327, 0.998795)
+bones/6/rotation = Quaternion(3.45431e-16, 0.707107, 5.38731e-16, 0.707107)
+bones/7/position = Vector3(-0.400204, 20.2567, -11.7984)
+bones/7/rotation = Quaternion(0.0514241, -0.616921, 0.784323, 0.0400111)
+bones/8/position = Vector3(-3.57373e-06, 24.1301, -7.97981e-06)
+bones/8/rotation = Quaternion(0.525579, 0.168655, 0.0729073, 0.830666)
+bones/9/position = Vector3(-4.7736e-06, 43.4836, -5.63287e-06)
+bones/9/rotation = Quaternion(0.0140785, 0.00608552, 0.412749, 0.910716)
+bones/10/position = Vector3(-1.62125e-05, 50.7159, -1.90735e-06)
+bones/11/rotation = Quaternion(0.792872, 0.01228, -0.0301765, 0.608516)
+bones/12/position = Vector3(5.78334e-06, 24.1301, -5.35083e-06)
+bones/12/rotation = Quaternion(0.515406, -0.104749, -0.0240431, 0.85018)
+bones/13/position = Vector3(-1.61522e-05, 43.7873, -7.28368e-06)
+bones/13/rotation = Quaternion(0.0116631, -0.0063673, -0.457649, 0.889034)
+bones/14/position = Vector3(1.4782e-05, 50.7135, 4.29154e-06)
+bones/14/rotation = Quaternion(1.65543e-07, -1.49943e-07, -1.03464e-07, 1)
+bones/15/rotation = Quaternion(0.04162, -0.0925775, 0.98975, -0.100461)
+bones/16/position = Vector3(9.36742e-06, 68.5657, -4.0225e-06)
+bones/16/rotation = Quaternion(0.0120696, -0.0844895, -0.318291, 0.944143)
+bones/17/position = Vector3(7.58941e-06, 61.7993, -1.92853e-06)
+bones/17/rotation = Quaternion(0.473913, -0.603375, 0.499812, 0.401913)
+bones/18/rotation = Quaternion(0.188676, 0.0100285, 0.052967, 0.980559)
+bones/19/position = Vector3(-5.86361e-06, 15.4755, 7.45067e-08)
+bones/20/rotation = Quaternion(-0.0858729, 0.0923769, 0.987239, -0.0972239)
+bones/21/rotation = Quaternion(-0.0184037, 0.0429465, -0.293656, 0.954769)
+bones/22/position = Vector3(5.31309e-06, 61.781, 9.77079e-07)
+bones/22/rotation = Quaternion(0.476394, -0.437714, 0.475863, 0.595826)
+bones/23/rotation = Quaternion(0.190312, -0.0100611, -0.0518238, 0.980303)
+
+[node name="AnimationPlayer" parent="HeadPivot/kid" index="1"]
+autoplay = "idle"
+
+[node name="blanket" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.79, 0, 0, 0, 0.92, 0, 0, 0, 0.04, 0, -0.422627, -0.169148)
+visible = false
+mesh = SubResource("BoxMesh_exqnh")
+
+[node name="playerState" type="Node3D" parent="."]
+script = ExtResource("2_bw0wc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="EyeMask" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/EyeMask"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0.00392157, 1)
+
+[node name="NoiseTexture" type="ColorRect" parent="CanvasLayer/EyeMask"]
+visible = false
+material = SubResource("ShaderMaterial_77120")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.596078)
+
+[node name="InteractLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = -7.0
+offset_right = 19.5
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Interact"
+label_settings = SubResource("LabelSettings_xcu84")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crosshair" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 3.0
+offset_bottom = 7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "+"
+label_settings = SubResource("LabelSettings_lcg4x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="dialogue" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -49.0
+offset_right = 21.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="PlayerSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xcu84")
+
+[node name="PlayerSound_heartbeat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lcg4x")
+
+[node name="PlayerSound_breathing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i7m25")
+pitch_scale = 1.5
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0534578, 0.189942)
+current = true
+
+[node name="Heartbeat_Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Heartbeat_Timer" to="." method="_on_heartbeat_timer_timeout"]
+
+[editable path="HeadPivot/kid"]

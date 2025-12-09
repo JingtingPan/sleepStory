@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://440umv6hbda4"]
+
+[ext_resource type="Script" uid="uid://blbf15p4klfld" path="res://scene/event_ui.gd" id="1_qjghd"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="EventUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_qjghd")
+sound = "res://dialogue/dialogSound.mp3"
+dialoguePath = "res://dialogue/myDialogue.json"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="EventUI"]
+
+[node name="Timer" type="Timer" parent="EventUI"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EventUI"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 39.0
+offset_top = 159.0
+offset_right = 387.0
+offset_bottom = 215.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0.99766, 0.341568, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/bold_italics_font_size = 10
+scroll_following = true
+
+[node name="ContinueTip" type="Polygon2D" parent="EventUI"]
+visible = false
+position = Vector2(-5, 1)
+color = Color(0.957412, 0.681918, 0.370936, 1)
+polygon = PackedVector2Array(381, 216, 391, 216, 386, 221)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="EventUI"]

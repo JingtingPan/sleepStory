@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://doe4dxgq60fhj"]
+
+[ext_resource type="PackedScene" uid="uid://crlu07y5rbtic" path="res://scene/interactable/interact_generic.tscn" id="1_agp52"]
+[ext_resource type="Script" uid="uid://bdxbwfmufvvy0" path="res://scripts/interactable/go_to_bed.gd" id="2_1y0n0"]
+
+[node name="SleepTrigger" instance=ExtResource("1_agp52")]
+script = ExtResource("2_1y0n0")
+event_name = ""
+prompt = ""
+light_check = false

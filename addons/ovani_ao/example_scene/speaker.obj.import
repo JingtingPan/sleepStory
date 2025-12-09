@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bnse5kgo2spxb"
+path="res://.godot/imported/speaker.obj-99c4106bda4628fb7e280b2237441e5f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/speaker.obj-99c4106bda4628fb7e280b2237441e5f.mesh"]
+
+source_file="res://addons/ovani_ao/example_scene/speaker.obj"
+dest_files=["res://.godot/imported/speaker.obj-99c4106bda4628fb7e280b2237441e5f.mesh", "res://.godot/imported/speaker.obj-99c4106bda4628fb7e280b2237441e5f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

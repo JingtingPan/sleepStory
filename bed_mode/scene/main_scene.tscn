@@ -1,0 +1,282 @@
+[gd_scene load_steps=29 format=3 uid="uid://bnhpt4tk3spbx"]
+
+[ext_resource type="PackedScene" uid="uid://bbbp6jiaa6lw4" path="res://bed_mode/scene/player_sleep.tscn" id="1_trap8"]
+
+[sub_resource type="Resource" id="Resource_qju0g"]
+metadata/__load_path__ = "res://scene/debug_status_overlay.gd"
+
+[sub_resource type="Resource" id="Resource_nrk2x"]
+metadata/__load_path__ = "res://script/warning_flash.gd"
+
+[sub_resource type="Resource" id="Resource_ulmbq"]
+metadata/__load_path__ = "res://models/mattress.tscn"
+
+[sub_resource type="Resource" id="Resource_2fpms"]
+metadata/__load_path__ = "res://models/furniture_bed_pillow.tscn"
+
+[sub_resource type="Resource" id="Resource_fp3y5"]
+metadata/__load_path__ = "res://models/furniture_bed_frame_001.tscn"
+
+[sub_resource type="Resource" id="Resource_cfbey"]
+metadata/__load_path__ = "res://models/furniture_wardrobe.tscn"
+
+[sub_resource type="Resource" id="Resource_3wsr8"]
+metadata/__load_path__ = "res://models/furniture_night_stand_drawer.tscn"
+
+[sub_resource type="Resource" id="Resource_ym20s"]
+metadata/__load_path__ = "res://models/furniture_night_stand_drawer.tscn"
+
+[sub_resource type="Resource" id="Resource_7q3lp"]
+metadata/__load_path__ = "res://models/electronic_lamp.tscn"
+
+[sub_resource type="Resource" id="Resource_r0x5d"]
+metadata/__load_path__ = "res://script/lamp.gd"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6o0di"]
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q0qn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8vgl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_235vl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ei8s6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epycl"]
+uv1_scale = Vector3(10.045, 4.955, 4.7)
+uv1_offset = Vector3(1.775, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yvw88"]
+
+[sub_resource type="Resource" id="Resource_7j8e3"]
+metadata/__load_path__ = "res://script/stare_monster_manager.gd"
+
+[sub_resource type="Resource" id="Resource_t4bpx"]
+metadata/__load_path__ = "res://scene/stare_monster.tscn"
+
+[sub_resource type="Resource" id="Resource_n5vw8"]
+metadata/__load_path__ = "res://scene/stare_monster.tscn"
+
+[sub_resource type="Resource" id="Resource_5fsa5"]
+metadata/__load_path__ = "res://scene/stare_monster.tscn"
+
+[sub_resource type="Environment" id="Environment_htmkl"]
+background_mode = 3
+ambient_light_source = 3
+ambient_light_color = Color(0.0235294, 0.133333, 0.152941, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.2
+fog_light_color = Color(0.385462, 0.559097, 0.555595, 1)
+volumetric_fog_density = 0.5316
+volumetric_fog_albedo = Color(0.333111, 0.520862, 0.525129, 1)
+volumetric_fog_detail_spread = 2.37841
+
+[sub_resource type="Resource" id="Resource_xytoe"]
+metadata/__load_path__ = "res://scene/walk_monster.tscn"
+
+[sub_resource type="Resource" id="Resource_jir3o"]
+metadata/__load_path__ = "res://script/night_manager.gd"
+
+[sub_resource type="Resource" id="Resource_7glsb"]
+metadata/__load_path__ = "res://resources/sfx/Horror SFX Free/Ambient/Vent_airflow.wav"
+
+[sub_resource type="Resource" id="Resource_vcowu"]
+metadata/__load_path__ = "res://resources/sfx/Horror SFX Free/Ambient/Rain_Medium_2.wav"
+
+[sub_resource type="Resource" id="Resource_2b4vo"]
+metadata/__load_path__ = "res://scene/thunder_noise.gd"
+
+[node name="main" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="fall_asleep" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -269.5
+offset_top = -34.5
+offset_right = 269.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0.713726, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "You have fallen asleep"
+
+[node name="game_over" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -34.5
+offset_right = 280.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.836322, 0, 0.18734, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 50
+text = "You failed to fall asleep"
+
+[node name="DebugStatusOverlay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("Resource_qju0g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugStatusOverlay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SleepLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SanityLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="CoveredLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="ViewLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="ViewTimeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="EyeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SafeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SleepBar" type="ProgressBar" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SanityBar" type="ProgressBar" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="WarningFlash" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.439216, 0.0117647, 0, 1)
+script = SubResource("Resource_nrk2x")
+
+[node name="furnitures" type="Node3D" parent="."]
+
+[node name="bed" type="Node3D" parent="furnitures"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.234485, 2.52689)
+
+[node name="Furniture_Mattress" parent="furnitures/bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471153, 0)
+
+[node name="Furniture_BedPillow" parent="furnitures/bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.948465, 0.988481)
+
+[node name="Furniture_BedFrame_001" parent="furnitures/bed"]
+
+[node name="Furniture_Wardrobe_002" parent="furnitures"]
+transform = Transform3D(-1.4, 0, 2.87647e-07, 0, 1.285, 0, -2.11394e-07, 0, -1.905, 4, 0.196205, 2.47436)
+
+[node name="Furniture_NightStand2Drawer" parent="furnitures"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, -1.95621, 0.191361, 3.6971)
+
+[node name="Furniture_NightStand2Drawer2" parent="furnitures"]
+transform = Transform3D(-1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 1.96125, 0.191361, 3.6971)
+
+[node name="Electronic_Lamp" parent="furnitures"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96547, 1.21605, 3.73868)
+script = SubResource("Resource_r0x5d")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="furnitures/Electronic_Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+light_color = Color(1, 0.87451, 0.666667, 1)
+light_energy = 0.152
+omni_range = 8.0
+
+[node name="room" type="Node3D" parent="."]
+
+[node name="floor" type="CSGBox3D" parent="room"]
+material_override = SubResource("StandardMaterial3D_6o0di")
+size = Vector3(10, 0.5, 10)
+
+[node name="ceilling" type="CSGBox3D" parent="room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000848293, 4.00054, 0.000511885)
+material_override = SubResource("StandardMaterial3D_6q0qn")
+size = Vector3(10, 0.5, 10)
+
+[node name="wall4" type="CSGBox3D" parent="room"]
+transform = Transform3D(-0.00174539, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00174539, 0.00301269, 1.99971, 5.00482)
+material_override = SubResource("StandardMaterial3D_w8vgl")
+size = Vector3(0.0673828, 3.48499, 10)
+
+[node name="wall5" type="CSGBox3D" parent="room"]
+transform = Transform3D(-0.00174539, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00174539, 0.00301269, 1.99971, -4.99518)
+material_override = SubResource("StandardMaterial3D_235vl")
+size = Vector3(0.0673828, 3.48499, 10)
+
+[node name="wall6" type="CSGBox3D" parent="room"]
+transform = Transform3D(-0.999999, 0, -0.00174543, 0, 1, 0, 0.00174543, 0, -0.999999, 5.00301, 1.99971, 0.00482416)
+material_override = SubResource("StandardMaterial3D_ei8s6")
+size = Vector3(0.0673828, 3.48499, 10)
+material = SubResource("StandardMaterial3D_epycl")
+
+[node name="wall7" type="CSGBox3D" parent="room"]
+transform = Transform3D(-0.999999, 0, -0.00174543, 0, 1, 0, 0.00174543, 0, -0.999999, -4.99699, 1.99971, 0.00482416)
+material_override = SubResource("StandardMaterial3D_yvw88")
+size = Vector3(0.0673828, 3.48499, 10)
+
+[node name="player" parent="." instance=ExtResource("1_trap8")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0790441, 1.46175, 3.39325)
+motion_mode = 1
+
+[node name="stareMonster_manager" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.47428)
+script = SubResource("Resource_7j8e3")
+
+[node name="stareMonster_left" parent="stareMonster_manager"]
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, -1.32806, 1.10327, 0.120211)
+
+[node name="stareMonster_mid" parent="stareMonster_manager"]
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, 0.128123, 1.92765, 0.120211)
+
+[node name="stareMonster_right" parent="stareMonster_manager"]
+transform = Transform3D(0.59, 0, 0, 0, 0.59, 0, 0, 0, 0.59, 1.32882, 1.10327, 0.120211)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_htmkl")
+
+[node name="walk_monster" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3, 0.22018, 2.31401)
+
+[node name="NightManager" type="Node3D" parent="."]
+script = SubResource("Resource_jir3o")
+
+[node name="bg_music" type="Node3D" parent="."]
+
+[node name="bg_noise" type="AudioStreamPlayer" parent="bg_music"]
+stream = SubResource("Resource_7glsb")
+autoplay = true
+
+[node name="rain" type="AudioStreamPlayer" parent="bg_music"]
+stream = SubResource("Resource_vcowu")
+autoplay = true
+
+[node name="thunder" type="AudioStreamPlayer" parent="bg_music"]
+script = SubResource("Resource_2b4vo")
+audio_clips = Array[AudioStream]([])
+
+[node name="Timer" type="Timer" parent="bg_music"]

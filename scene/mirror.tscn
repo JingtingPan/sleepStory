@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2r4y1ps88msr"]
+
+[ext_resource type="Script" uid="uid://08sja7oxwawm" path="res://scripts/mirror.gd" id="1_bsxwa"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gfnnu"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="BoxMesh" id="BoxMesh_eiv2h"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_45sec"]
+
+[node name="mirror" type="Node3D" node_paths=PackedStringArray("player_dummy")]
+script = ExtResource("1_bsxwa")
+player_dummy = NodePath("SubViewport/PlayerDummy")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.4, 0, 0, 0, 0.02, 0, 0, 0.0516487)
+texture = SubResource("ViewportTexture_gfnnu")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+transform = Transform3D(0.1, 0, 0, 0, 0.122, 0, 0, 0, 0.159, 0, 0, -1.17047)
+mesh = SubResource("BoxMesh_eiv2h")
+skeleton = NodePath("../..")
+
+[node name="MirrorCamera3D" type="Camera3D" parent="SubViewport"]
+cull_mask = 1048064
+
+[node name="PlayerDummy" type="MeshInstance3D" parent="SubViewport"]
+visible = false
+mesh = SubResource("CapsuleMesh_45sec")

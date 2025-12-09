@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnhpt4tk3spbx"]
+
+[ext_resource type="PackedScene" uid="uid://bbbp6jiaa6lw4" path="res://scene/player.tscn" id="1_trap8"]
+[ext_resource type="PackedScene" uid="uid://cowhktak8ubxy" path="res://scene/basicMonster.tscn" id="2_e2ku4"]
+[ext_resource type="Script" path="res://scene/debug_status_overlay.gd" id="3_vgucp"]
+[ext_resource type="Script" path="res://vector_drawer.gd" id="4_pu61e"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.698628, 0.715485, 0, 3.12749e-08, 3.0538e-08, 1, 0.715485, 0.698628, -4.37114e-08, 0, 4.24006, 2)
+shadow_enabled = true
+
+[node name="floor" type="CSGBox3D" parent="."]
+size = Vector3(10, 0.5, 10)
+
+[node name="bed" type="CSGBox3D" parent="."]
+
+[node name="wall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.263, 0.757213, 0.133591)
+size = Vector3(0.0673828, 1, 2.60797)
+
+[node name="wall4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.263, 2.75721, 0.133591)
+size = Vector3(0.0673828, 1, 2.60797)
+
+[node name="wall2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21755, 0.757213, -1.75929)
+size = Vector3(0.0673828, 1, 2.60797)
+
+[node name="wall3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21755, 0.757213, 1.85953)
+size = Vector3(0.0673828, 1, 2.60797)
+
+[node name="player" parent="." instance=ExtResource("1_trap8")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.680961, 0)
+motion_mode = 1
+
+[node name="monster" parent="." instance=ExtResource("2_e2ku4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.574792, 0)
+approach_speed = 0.005
+attack_distance = 1.5
+check_interval = 1.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugStatusOverlay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_vgucp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/DebugStatusOverlay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SleepLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SanityLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="CoveredLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="ViewLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="ViewTimeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="EyeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="SafeLabel" type="Label" parent="CanvasLayer/DebugStatusOverlay/VBoxContainer"]
+layout_mode = 2
+
+[node name="VectorDrawer" type="Node3D" parent="."]
+script = ExtResource("4_pu61e")

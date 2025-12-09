@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://x3xy2vyjwc75"
+path="res://.godot/imported/Classic Dial A.wav-da8b5ea03818d8a2d298f6ea0b884265.sample"
+
+[deps]
+
+source_file="res://addons/ovani_ao/example_scene/SFX/Classic Dial A.wav"
+dest_files=["res://.godot/imported/Classic Dial A.wav-da8b5ea03818d8a2d298f6ea0b884265.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,289 @@
+[gd_scene load_steps=23 format=3 uid="uid://c87bv5d7rey4k"]
+
+[ext_resource type="Material" uid="uid://pl1306kfgenb" path="res://addons/ovani_ao/example_scene/Materials/whispy-grass-meadow-unity/whispy-grass-meadow-unity.tres" id="1_nsr3g"]
+[ext_resource type="Material" uid="uid://dkxirb68b5laj" path="res://addons/ovani_ao/example_scene/Materials/alley-brick-wall-unity/alley-brick-wall-unity.tres" id="2_6mmp6"]
+[ext_resource type="AudioStream" uid="uid://x3xy2vyjwc75" path="res://addons/ovani_ao/example_scene/SFX/Classic Dial A.wav" id="3_ohll1"]
+[ext_resource type="AudioStream" uid="uid://51ywsdrmi6n5" path="res://addons/ovani_ao/example_scene/SFX/Classic Dial B.wav" id="4_uxto7"]
+[ext_resource type="ArrayMesh" uid="uid://bnse5kgo2spxb" path="res://addons/ovani_ao/example_scene/speaker.obj" id="5_8kv28"]
+[ext_resource type="Script" uid="uid://d2ahonhwqy5ay" path="res://addons/ovani_ao/audio_occluder.gd" id="6_w2nuc"]
+[ext_resource type="AudioStream" uid="uid://bg1cjb7ybvask" path="res://addons/ovani_ao/example_scene/SFX/Afro Beats Weak Knees Main.wav" id="7_0ind4"]
+[ext_resource type="Texture2D" uid="uid://cf300bk2mbfw0" path="res://addons/ovani_ao/Thank You from Ovani Sound.png" id="8_s2jeb"]
+[ext_resource type="PackedScene" uid="uid://yrfimtbvboqi" path="res://scene/player.tscn" id="10_7xams"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xktgp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ue1gy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_so8mk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1elk5"]
+albedo_color = Color(0.454524, 0.454524, 0.454524, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pksdp"]
+
+[sub_resource type="Sky" id="Sky_mik83"]
+sky_material = SubResource("ProceduralSkyMaterial_pksdp")
+
+[sub_resource type="Environment" id="Environment_jygt0"]
+background_mode = 2
+sky = SubResource("Sky_mik83")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xktgp"]
+albedo_color = Color(0.31802, 0.31802, 0.31802, 1)
+
+[sub_resource type="GDScript" id="GDScript_ue1gy"]
+script/source = "extends MeshInstance3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+@onready var Door : Node3D = $\"../Door\"
+@onready var Player: StandingPlayer = $\"../player\"
+
+var DoorStartPos := Vector3(7.65500021,3.02670002,3.88380027)
+var DoorEndPos := Vector3(5.26999998,3.02670002,3.88380027)
+
+var LeverStartPos := Vector3(4.103, 2.842, 5.96)
+var LeverEndPos := Vector3(4.103, 2.743, 5.96)
+
+var LeverStartRot := -47.2;
+var LeverEndRot := -146.5;
+var curRot := LeverStartRot
+
+func _process(delta: float) -> void:
+	var targDoorPos : Vector3 = DoorStartPos if state else DoorEndPos
+	Door.position = lerp(Door.position, targDoorPos, delta if !state else delta*2)
+	
+	var targLeverPos : Vector3 = LeverStartPos if state else LeverEndPos
+	position = lerp(position, targLeverPos, delta*2)
+	
+	var targLeverRot : float = LeverStartRot if state else LeverEndRot
+	curRot = lerp(curRot, targLeverRot, delta*4)
+	
+	rotation_degrees = Vector3(0, 0, curRot)
+
+var state : bool = true;
+
+@export var open : AudioStream
+@export var close : AudioStream
+@onready var sfx : AudioStreamPlayer3D = $AudioStreamPlayer3D
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and Player.global_position.distance_to(global_position) < 2:
+		var evt : InputEventKey = event
+		if evt.keycode == KEY_E and evt.pressed:
+			state = !state
+			sfx.stream = open if state else close
+			sfx.play()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pksdp"]
+size = Vector3(2.01276, 3.34134, 2.07007)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23odd"]
+albedo_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jji4o"]
+shading_mode = 0
+albedo_texture = ExtResource("8_s2jeb")
+
+[sub_resource type="QuadMesh" id="QuadMesh_7xams"]
+
+[node name="Example" type="Node3D"]
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="player" parent="Map" instance=ExtResource("10_7xams")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2.197, 1.82279, 18.0404)
+
+[node name="Box" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(41.098, 0, 0, 0, 1, 0, 0, 0, 36.958, 2.197, 0, 3.473)
+material_override = ExtResource("1_nsr3g")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box2" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(6.685, 0, 0, 0, 5.627, 0, 0, 0, 0.449, 0.654, 3.027, 6.53056)
+material_override = ExtResource("2_6mmp6")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box2/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box3" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(7.097, 0, 0, 0, 5.627, 0, 0, 0, 0.43, 3.274, 3.027, -2.94)
+material_override = ExtResource("2_6mmp6")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box3/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box4" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.712, 0, 0, 0, 5.627, 0, 0, 0, 7.18, 6.48, 3.027, 0.437)
+material_override = ExtResource("2_6mmp6")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box4/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box5" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.712, 0, 0, 0, 5.627, 0, 0, 0, 6.57646, 0.08, 3.027, 0.508788)
+material_override = ExtResource("2_6mmp6")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box5/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box6" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.712, 0, 0, 0, 5.627, 0, 0, 0, 6.529, 3.64, 3.027, 3.076)
+material_override = ExtResource("2_6mmp6")
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box6/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box7" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(6.546, 0, 0, 0, 1, 0, 0, 0, 10.0515, 3.67, 5.357, 1.76757)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_so8mk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box7/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box8" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(-5.66368e-07, -5.627, 0, 12.957, -2.45964e-07, 0, 0, 0, 6.665, 11.99, -1.714, 4.64)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_so8mk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box8/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Box11" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.236, 0, 0, 0, 0.523, 0, 0, 0, 0.523, 3.946, 2.793, 5.96)
+mesh = SubResource("BoxMesh_xktgp")
+
+[node name="Box12" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.252, 0, 0, 0, 0.315, 0, 0, 0, 0.228, 3.946, 2.793, 5.96)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_1elk5")
+
+[node name="Box9" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(7.93545, -2.36853, -4.45976, 7.33893, 4.63736, 0, 7.14511, -2.13263, 4.95306, -6.3, -1.714, -11.539)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_so8mk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Box9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Box9/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
+transform = Transform3D(0.847122, 0.407075, 0.341576, -5.61943e-08, -0.642788, 0.766044, 0.531398, -0.648933, -0.54452, 19.8115, 4.94305, 0)
+shadow_enabled = true
+shadow_bias = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_jygt0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.12605, 4.24864, -1.87229)
+shadow_enabled = true
+omni_range = 10.65
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56813, 4.24864, -1.87229)
+shadow_enabled = true
+omni_range = 10.65
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.94028, 4.24864, -1.87229)
+shadow_enabled = true
+omni_range = 10.65
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62963, 4.24864, -1.87229)
+shadow_enabled = true
+omni_range = 10.65
+
+[node name="Door" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(3.047, 0, 0, 0, 5.627, 0, 0, 0, 0.373, 7.655, 3.027, 3.884)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_so8mk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Door"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Door/StaticBody3D"]
+shape = SubResource("BoxShape3D_ue1gy")
+
+[node name="Lever" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(0.114146, 0.383741, 0, -0.123267, 0.355348, 0, 0, 0, 0.174, 4.103, 2.818, 5.96)
+mesh = SubResource("BoxMesh_xktgp")
+surface_material_override/0 = SubResource("StandardMaterial3D_xktgp")
+script = SubResource("GDScript_ue1gy")
+open = ExtResource("3_ohll1")
+close = ExtResource("4_uxto7")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Map/Lever"]
+
+[node name="Speaker" type="RigidBody3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.196, 1.409, -2.166)
+collision_layer = 2
+collision_mask = 3
+mass = 0.001
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Speaker"]
+transform = Transform3D(0.320512, 1.47109e-08, -0.168273, 0, -0.362, -3.1647e-08, 0.168273, -2.80201e-08, 0.320512, -0.00439262, -0.0874454, 0.00273466)
+shape = SubResource("BoxShape3D_pksdp")
+
+[node name="UploadsFiles2403801Logitech" type="MeshInstance3D" parent="Map/Speaker"]
+transform = Transform3D(0.320512, 1.47109e-08, -0.168273, 0, -0.362, -3.1647e-08, 0.168273, -2.80201e-08, 0.320512, 4.76837e-07, 1.19209e-07, 0)
+mesh = ExtResource("5_8kv28")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_23odd")
+surface_material_override/1 = SubResource("StandardMaterial3D_23odd")
+surface_material_override/2 = SubResource("StandardMaterial3D_23odd")
+surface_material_override/3 = SubResource("StandardMaterial3D_23odd")
+surface_material_override/4 = SubResource("StandardMaterial3D_23odd")
+
+[node name="AudioOccluder" type="Node3D" parent="Map/Speaker"]
+transform = Transform3D(1.14395, 0, 0, 0, 1.14395, 0, 0, 0, 1.14395, -0.0297446, -0.0635084, 0.0540874)
+script = ExtResource("6_w2nuc")
+audio_range = 13.0
+collision_margin = 0.9
+voxel_preview = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Map/Speaker/AudioOccluder"]
+transform = Transform3D(0.874167, 0, 0, 0, 0.874167, 0, 0, 0, 0.874167, -0.090261, 0, 0)
+stream = ExtResource("7_0ind4")
+attenuation_model = 2
+volume_db = inf_neg
+unit_size = 100.0
+autoplay = true
+max_distance = 14.8713
+attenuation_filter_cutoff_hz = 20500.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(-3.1086, 0, 0, 0, 3.56604, 0, 0, 0, 3.56604, -0.546643, 2.7954, 6.80352)
+material_override = SubResource("StandardMaterial3D_jji4o")
+mesh = SubResource("QuadMesh_7xams")
